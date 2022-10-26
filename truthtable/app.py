@@ -1,15 +1,24 @@
 from re import findall
-from typing import List
+from typing import List, Tuple
 
 
 class Truth:
     def __init__(self, expression: str) -> None:
-        self.expression: str = expression.replace(" ", "")
+        self.expression: str = expression
 
     def get_variables_from_expression(self) -> List[str]:
-        return list(set(findall(r"[A-Z]", self.expression)))
+        return sorted(list(set(findall(r"[A-Z]", self.expression))))
 
-    def get_truth_table(self) -> List[List[int]]:
+    def insert_operators_into_expression(self, expression: list) -> str:
+        return (
+            expression
+            .replace("&", "and")
+            .replace("|", "or")
+            .replace("!", "not")
+            .replace("_", "<=")
+        )
+
+    def get_truth_values(self) -> List[List[int]]:
         variables = self.get_variables_from_expression()
         table = []
 
@@ -18,32 +27,49 @@ class Truth:
 
         return table
 
-    def get_truth_values(self) -> List[int]:
-        return [self.get_truth_value(row) for row in self.get_truth_table()]
+    def get_table_with_replaced_operations(self) -> List[List[int]]:
+        table = []
 
-    def get_truth_value(self, row: List[int]) -> int:
-        expression = self.expression
+        for row in self.get_truth_values():
+            variables = self.get_variables_from_expression()
+            expression = self.expression
 
-        for index, variable in enumerate(self.get_variables_from_expression()):
-            expression = expression.replace(variable, str(row[index]))
+            for variable, value in zip(variables, row):
+                expression = expression.replace(variable, str(value))
 
+            table.append(expression)
+
+        return table
+
+    def execute_code(self, expression: str) -> int:
         return int(eval(expression))
 
-    def __str__(self) -> str:
-        table = self.get_truth_table()
-        values = self.get_truth_values()
+    def get_values_of_expressions(self) -> List[int]:
+        values = []
 
-        string = ""
+        for replacing_expression in self.get_table_with_replaced_operations():
+            values.append(
+                self.execute_code(
+                    self.insert_operators_into_expression(replacing_expression)
+                )
+            )
 
-        for index, variable in enumerate(self.get_variables_from_expression()):
-            string += f"{variable} "
+        return values
 
-        string += "| Result\n"
+    def get_truth_table(self):
+        table = zip(self.get_truth_values(), self.get_values_of_expressions())
 
-        for row in table:
-            for value in row:
-                string += f"{value} "
+        string_truth_table = "\n".join(
+            " ".join(map(str, row)) + f" → {result}"
+            for row, result in table
+        )
+        return string_truth_table
 
-            string += f"| {values[table.index(row)]}\n"
+    def __str__(self):
+        truth_table = [
+            f"Expression: {self.expression}\n"
+            f"{' '.join(self.get_variables_from_expression())} → Result",
+            self.get_truth_table()
+        ]
 
-        return string
+        return "\n".join(truth_table)
