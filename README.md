@@ -1,1 +1,2 @@
-## TruthConverter — a library for creating truth tables.
+## About the library
+# TruthConverter — a library for creating truth tables.
