@@ -1,6 +1,7 @@
-<h1 align="center" name="name">TruthConverter — a library for creating truth tables.</h1>
+<h1 align="center" name="name">TruthConverter</h1>
 <p align="center">
     <em>
+        TruthConverter — a library for creating truth tables.
         With Truth Converter, you can create truth tables with all available logical operations.
     </em>
 </p>
