@@ -36,5 +36,5 @@ truth: Truth = Truth("(X | Y) & (Y == Z) & !W")
 print(str(truth))
 ```
 
-Output:
-![Image](https://user-images.githubusercontent.com/71513188/213754877-58b26249-f582-4e1c-bb46-28df14280220.png)
+![image](https://user-images.githubusercontent.com/71513188/213755048-0cca1f78-eba9-4225-8550-716ae54d57a9.png)
+
