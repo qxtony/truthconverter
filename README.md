@@ -17,7 +17,7 @@ cd truthconverter
 
 To start the program, enter the following:
 ```sh
-python -m truthconverter
+python -m truthtable
 ```
 
 The following operations are supported:</br>
