@@ -8,15 +8,10 @@
 
 
 
-## Installation
+Install and go to the folder:
 
 ```bash
 git clone https://github.com/qxtony/truthconverter.git
-```
-
-Go to the folder:
-
-```bash
 cd truthconverter
 ```
 
