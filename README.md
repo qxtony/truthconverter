@@ -20,6 +20,11 @@ To start the program, enter the following:
 python -m truthconverter
 ```
 
+The following operations are supported:
+& - and
+| - or
+! - not
+_ - following
 
 ## Example:
 
