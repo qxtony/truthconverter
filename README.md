@@ -21,7 +21,7 @@ python -m truthconverter
 ```
 
 The following operations are supported:
-& - and
+& - and\n
 | - or
 ! - not
 _ - following
